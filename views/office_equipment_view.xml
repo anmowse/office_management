@@ -1,10 +1,8 @@
 <openerp>
   <data>
 
-    <!-- Menu -->
-    <menuitem id="menu_office_management_root" name="Quản lý văn phòng"/>
-    <menuitem id="menu_office_equipment" name="Thiết bị văn phòng" parent="menu_office_management_root"/>
-
+    <!-- Menu structure removed and replaced with references to existing structure -->
+    
     <!-- Action -->
     <record id="action_office_equipment" model="ir.actions.act_window">
       <field name="name">Thiết bị văn phòng</field>
@@ -12,8 +10,12 @@
       <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- Menu Action -->
-    <menuitem id="menu_office_equipment_items" name="Danh sách thiết bị" parent="menu_office_equipment" action="action_office_equipment"/>
+    <!-- Menu Action - Modified to use the same menu structure as department view -->
+    <menuitem id="menu_office_equipment_items" 
+              name="Thiết bị văn phòng" 
+              parent="menu_office_management" 
+              action="action_office_equipment"
+              sequence="20"/>
 
     <!-- Tree View -->
     <record id="view_office_equipment_tree" model="ir.ui.view">
