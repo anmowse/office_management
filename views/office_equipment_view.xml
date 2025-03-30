@@ -1,0 +1,66 @@
+<openerp>
+  <data>
+
+    <!-- Menu -->
+    <menuitem id="menu_office_management_root" name="Quản lý văn phòng"/>
+    <menuitem id="menu_office_equipment" name="Thiết bị văn phòng" parent="menu_office_management_root"/>
+
+    <!-- Action -->
+    <record id="action_office_equipment" model="ir.actions.act_window">
+      <field name="name">Thiết bị văn phòng</field>
+      <field name="res_model">office.equipment</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu Action -->
+    <menuitem id="menu_office_equipment_items" name="Danh sách thiết bị" parent="menu_office_equipment" action="action_office_equipment"/>
+
+    <!-- Tree View -->
+    <record id="view_office_equipment_tree" model="ir.ui.view">
+      <field name="name">office.equipment.tree</field>
+      <field name="model">office.equipment</field>
+      <field name="arch" type="xml">
+        <tree string="Thiết bị văn phòng">
+          <field name="name"/>
+          <field name="equipment_type"/>
+          <field name="serial_number"/>
+          <field name="location"/>
+          <field name="status"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_office_equipment_form" model="ir.ui.view">
+      <field name="name">office.equipment.form</field>
+      <field name="model">office.equipment</field>
+      <field name="arch" type="xml">
+        <form string="Thiết bị văn phòng">
+          <group>
+            <field name="name"/>
+            <field name="equipment_type"/>
+            <field name="serial_number"/>
+            <field name="location"/>
+            <field name="department"/>
+            <field name="status"/>
+            <field name="note"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_office_equipment_search" model="ir.ui.view">
+      <field name="name">office.equipment.search</field>
+      <field name="model">office.equipment</field>
+      <field name="arch" type="xml">
+        <search string="Tìm kiếm thiết bị">
+          <field name="name"/>
+          <field name="equipment_type"/>
+          <field name="status"/>
+        </search>
+      </field>
+    </record>
+
+  </data>
+</openerp>

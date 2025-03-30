@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Tree View -->
+        <record id="view_office_department_tree" model="ir.ui.view" >
+            <field name="name">office.department.tree</field>
+            <field name="model">office.department</field>
+            <field name="arch" type="xml">
+      <tree string="Departments" colors="red:state=='inactive'; green:state=='active'; blue:state=='recruiting'">
+    <field name="name"/>
+    <field name="state"/>
+    <field name="description"/>
+    <field name="created_date"/>
+    <field name="manager"/>
+     <field name="employee_count" align="left"/>
+</tree>
+            </field>
+        </record>
+
+                <!-- Form View -->
+        <record id="view_office_department_form" model="ir.ui.view">
+            <field name="name">office.department.form</field>
+            <field name="model">office.department</field>
+            <field name="arch" type="xml">
+                <form string="Department" version="7.0">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="state"/>
+                            <field name="created_date"/>
+                            <field name="manager"/>
+                            <field name="employee_count"/>
+                        </group>
+
+                        <!-- Nhóm chứa nút bấm -->
+                        <group>
+                            <button name="set_active" string="Kích hoạt" type="object" attrs="{'invisible': [('state', '=', 'active')]}"/>
+                            <button name="set_inactive" string="Vô hiệu hóa" type="object" attrs="{'invisible': [('state', '=', 'inactive')]}"/>
+                        </group>
+
+                        <notebook>
+                            <page string="Description">
+                                <field name="description"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="view_office_department_search" model="ir.ui.view">
+            <field name="name">office.department.search</field>
+            <field name="model">office.department</field>
+            <field name="arch" type="xml">
+     <search string="Search Department">
+    <field name="name" string="Department"/>
+    <field name="manager"/>
+    <filter string="Active" name="active" domain="[('state','=','active')]"/>
+    <filter string="Inactive" name="inactive" domain="[('state','=','inactive')]"/>
+    <filter string="Recruiting" name="recruiting" domain="[('state','=','recruiting')]"/>
+ 
+</search>
+
+
+            </field>
+        </record>
+        <record id="view_office_department_graph" model="ir.ui.view">
+    <field name="name">office.department.graph</field>
+    <field name="model">office.department</field>
+    <field name="arch" type="xml">
+        <graph string="Department Status">
+            <field name="state" type="row"/>
+            <field name="id" type="measure" string="Số lượng phòng ban"/>
+        </graph>
+    </field>
+</record>
+        <!-- Action -->
+        <record id="action_office_department" model="ir.actions.act_window">
+            <field name="name">Departments</field>
+            <field name="res_model">office.department</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph</field>
+        </record>
+        <!-- Menu Structure -->
+        <menuitem id="menu_office_main" 
+                  name="Quản lý văn phòng"
+                  sequence="10"/>
+                  
+        <menuitem id="menu_office_management" 
+                  name="Office Management"
+                  parent="menu_office_main"
+                  sequence="10"/>
+                  
+        <menuitem id="menu_office_department" 
+                  name="Phòng ban"
+                  parent="menu_office_management"
+                  action="action_office_department"
+                  sequence="10"/>
+    </data>
+</openerp>
